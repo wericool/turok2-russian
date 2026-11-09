@@ -1,11 +1,10 @@
 @echo off
-chcp 65001 >nul
-rem Собирает dist\Turok2_Russian_Setup.exe (нужен .NET Framework 4.x — есть в любой Windows 10/11).
-rem Перед этим соберите мод: python tools\build.py
+rem Builds dist\Turok2_Russian_Setup.exe (needs .NET Framework 4.x, present in Windows 10/11).
+rem Build the mod first: python tools\build.py
 setlocal
 cd /d "%~dp0.."
 if not exist dist\Siberian.kpf (
-  echo Нет dist\Siberian.kpf — сначала выполните: python tools\build.py
+  echo dist\Siberian.kpf not found - run first: python tools\build.py
   exit /b 1
 )
 set CSC=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\csc.exe
@@ -16,4 +15,4 @@ if not exist "%CSC%" set CSC=%WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe
   /r:System.Windows.Forms.dll /r:System.Drawing.dll ^
   /out:dist\Turok2_Russian_Setup.exe installer\Installer.cs
 if errorlevel 1 exit /b 1
-echo Готово: dist\Turok2_Russian_Setup.exe
+echo Done: dist\Turok2_Russian_Setup.exe

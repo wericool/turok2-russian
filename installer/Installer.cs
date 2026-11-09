@@ -13,6 +13,8 @@ using Microsoft.Win32;
 [assembly: AssemblyTitle("Turok 2 Russian")]
 [assembly: AssemblyDescription("Русификатор Turok 2: Seeds of Evil Remastered 3.0")]
 [assembly: AssemblyProduct("Turok 2 Russian")]
+[assembly: AssemblyCompany("Siberian Studio (2018), ericool (2026)")]
+[assembly: AssemblyCopyright("Основа: русификатор Siberian Studio (2018). Перевод новых текстов, адаптация под 3.0 и исправления: ericool (2026)")]
 [assembly: AssemblyVersion("2026.11.9.0")]
 
 static class Program
@@ -112,7 +114,7 @@ class SetupForm : Form
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;
         StartPosition = FormStartPosition.CenterScreen;
-        ClientSize = new Size(600, 300);
+        ClientSize = new Size(600, 334);
         try { Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
 
         var title = new Label();
@@ -123,24 +125,33 @@ class SetupForm : Form
 
         var info = new Label();
         info.Text = "Для версии игры 3.0.x (Steam). Перевод интерфейса, предметов, заданий, субтитров роликов,\n" +
-                    "достижений и настроек; шрифты с кириллицей.\n\n" +
-                    "За основу взят русификатор Siberian Studio (2018). Обновление для версии 3.0 — ericool.";
-        info.SetBounds(16, 44, 570, 76);
+                    "достижений и настроек; шрифты с кириллицей.";
+        info.SetBounds(16, 44, 570, 40);
         Controls.Add(info);
+
+        var credits = new GroupBox();
+        credits.Text = "Авторы";
+        credits.SetBounds(16, 88, 568, 62);
+        var credText = new Label();
+        credText.Text = "За основу взят русификатор Siberian Studio (2018).\n" +
+                        "Перевод новых текстов, адаптация под версию 3.0 и исправления — ericool.";
+        credText.SetBounds(10, 18, 550, 38);
+        credits.Controls.Add(credText);
+        Controls.Add(credits);
 
         var lbl = new Label();
         lbl.Text = "Папка игры:";
-        lbl.SetBounds(16, 128, 570, 20);
+        lbl.SetBounds(16, 162, 570, 20);
         Controls.Add(lbl);
 
         pathBox.Text = path;
-        pathBox.SetBounds(16, 150, 470, 26);
+        pathBox.SetBounds(16, 184, 470, 26);
         pathBox.TextChanged += delegate { UpdateStatus(); };
         Controls.Add(pathBox);
 
         var browse = new Button();
         browse.Text = "Обзор…";
-        browse.SetBounds(494, 148, 90, 28);
+        browse.SetBounds(494, 182, 90, 28);
         browse.Click += delegate
         {
             using (var d = new FolderBrowserDialog())
@@ -152,25 +163,25 @@ class SetupForm : Form
         };
         Controls.Add(browse);
 
-        status.SetBounds(16, 184, 570, 60);
+        status.SetBounds(16, 218, 570, 60);
         Controls.Add(status);
 
         var install = new Button();
         install.Text = "Установить";
-        install.SetBounds(16, 254, 140, 32);
+        install.SetBounds(16, 288, 140, 32);
         install.Click += delegate { DoInstall(); };
         Controls.Add(install);
         AcceptButton = install;
 
         var remove = new Button();
         remove.Text = "Удалить";
-        remove.SetBounds(164, 254, 120, 32);
+        remove.SetBounds(164, 288, 120, 32);
         remove.Click += delegate { DoRemove(); };
         Controls.Add(remove);
 
         var exit = new Button();
         exit.Text = "Выход";
-        exit.SetBounds(484, 254, 100, 32);
+        exit.SetBounds(484, 288, 100, 32);
         exit.Click += delegate { Close(); };
         Controls.Add(exit);
         CancelButton = exit;
