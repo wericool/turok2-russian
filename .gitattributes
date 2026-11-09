@@ -1,0 +1,6 @@
+* text=auto
+*.cmd text eol=crlf
+siberian_2018/** -text
+*.png binary
+*.ttf binary
+*.kpf binary
